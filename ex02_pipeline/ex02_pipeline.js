@@ -71,13 +71,13 @@ function main() {
         varying vec4 vFragColor;
 
         void main() {
-            gl_FragColor = vFragColor;
-            // if( mod(gl_FragCoord.x,10.0) < 5.0 ) {  
-            //     gl_FragColor = vFragColor;
-            // } else {
-            //     gl_FragColor = vec4(1.0,1.0,1.0,2.0) 
-            //                    - vFragColor;
-            // }              
+            //gl_FragColor = vFragColor;
+             if( (mod(gl_FragCoord.x,10.0) < 5.0 || mod(gl_FragCoord.y,10.0) < 5.0) && ! (mod(gl_FragCoord.x,10.0) < 5.0 && mod(gl_FragCoord.y,10.0) < 5.0) ) {  
+                 gl_FragColor = vFragColor;
+             } else {
+                 gl_FragColor = vec4(1.0,1.0,1.0,2.0) 
+                                - vFragColor;
+             }              
         }    
     `;
 
@@ -154,7 +154,7 @@ function main() {
     gl.uniformMatrix4fv(modelMatrixLocation, false, modelViewMatrix);
         
     /*========== Drawing ======================== */
-    gl.clearColor(1, 1, 1, 1);
+    gl.clearColor(0, 0, 0, 1);
     gl.enable(gl.DEPTH_TEST);
     gl.depthFunc(gl.LEQUAL);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
